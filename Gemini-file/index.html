@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pantry Rhythm — smarter grocery list</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Mono:wght@500;600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="site-head">
+  <div class="site-head__mark" aria-hidden="true">
+    <span class="dot dot--overbuy"></span><span class="dot dot--borderline"></span><span class="dot dot--normal"></span>
+  </div>
+  <div>
+    <h1>Pantry&nbsp;Rhythm</h1>
+    <p class="site-head__tag">A grocery list that remembers your buying pace — so you stop restocking coffee twice a week and stop forgetting the toilet paper.</p>
+  </div>
+</header>
+
+<main class="layout">
+
+  <section class="panel panel--list" aria-labelledby="list-heading">
+    <h2 id="list-heading">Shopping list</h2>
+
+    <form id="add-form" class="add-form">
+      <div class="add-form__row">
+        <label class="sr-only" for="item-name">Item name</label>
+        <input id="item-name" list="catalog-options" placeholder="Add an item…" autocomplete="off" required />
+        <datalist id="catalog-options"></datalist>
+        <button type="submit" class="btn btn--primary">Add</button>
+      </div>
+      <div class="add-form__row add-form__row--fine">
+        <label class="sr-only" for="item-category">Category</label>
+        <input id="item-category" placeholder="Category (optional)" autocomplete="off" />
+        <label class="sr-only" for="item-cadence">Usual cadence in days</label>
+        <input id="item-cadence" type="number" min="1" placeholder="Usual gap, days" autocomplete="off" />
+      </div>
+    </form>
+
+    <div id="suggestions" class="suggestions" hidden>
+      <h3>You might have forgotten these</h3>
+      <div id="suggestions-body"></div>
+    </div>
+
+    <ul id="shopping-list" class="ticket-list" aria-label="Current shopping list"></ul>
+    <p id="empty-list" class="muted empty-state">Your list is empty. Add something above — common items like milk or coffee will suggest a normal cadence automatically.</p>
+  </section>
+
+  <section class="panel panel--rhythm" aria-labelledby="rhythm-heading">
+    <h2 id="rhythm-heading">Buying rhythm</h2>
+    <p class="panel__sub">Where each item sits between "bought again too soon" and "hasn't been bought in a while," based on its own usual pace.</p>
+
+    <div class="legend">
+      <span><i class="swatch swatch--overbuy"></i>Overbuying</span>
+      <span><i class="swatch swatch--borderline"></i>Borderline</span>
+      <span><i class="swatch swatch--normal"></i>Normal</span>
+      <span><i class="swatch swatch--due"></i>Due / forgotten</span>
+    </div>
+
+    <div id="rhythm-list" class="rhythm-list"></div>
+  </section>
+
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
