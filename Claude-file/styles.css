@@ -1,0 +1,326 @@
+/* =========================================================================
+   Design tokens
+   ========================================================================= */
+:root {
+  --paper: #F2F0E6;
+  --card: #FBFAF6;
+  --ink: #202A20;
+  --ink-soft: #57604F;
+  --pantry: #3F6B52;
+  --pantry-deep: #2B4A3A;
+  --mustard: #D9A441;
+  --rust: #C1502E;
+  --line: rgba(32, 42, 32, 0.16);
+  --line-soft: rgba(32, 42, 32, 0.09);
+
+  --font-display: 'Archivo', system-ui, sans-serif;
+  --font-body: 'Karla', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-font-smoothing: antialiased; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  background-image:
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size: 44px 100%;
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+h1, h2, h3 { font-family: var(--font-display); margin: 0; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.muted { color: var(--ink-soft); font-size: 0.88rem; }
+
+/* =========================================================================
+   Header — signature: three rhythm dots standing in for the app's whole
+   premise (overbuy / borderline / normal) before you've read a word
+   ========================================================================= */
+.site-head {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 48px 24px 28px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.site-head__mark {
+  display: flex;
+  gap: 6px;
+  padding-top: 10px;
+  flex-shrink: 0;
+}
+.dot {
+  width: 12px; height: 12px; border-radius: 999px;
+  box-shadow: 0 0 0 3px var(--paper), 0 0 0 4px var(--line);
+}
+.dot--overbuy { background: var(--rust); }
+.dot--borderline { background: var(--mustard); }
+.dot--normal { background: var(--pantry); }
+
+.site-head h1 {
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--pantry-deep);
+}
+.site-head__tag {
+  margin: 8px 0 0;
+  max-width: 46ch;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+/* =========================================================================
+   Layout
+   ========================================================================= */
+.layout {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px 64px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 820px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.panel h2 { font-size: 1.15rem; letter-spacing: -0.01em; }
+.panel__sub { color: var(--ink-soft); font-size: 0.88rem; margin: 6px 0 18px; }
+
+/* =========================================================================
+   Add form
+   ========================================================================= */
+.add-form { margin: 18px 0 20px; display: grid; gap: 8px; }
+.add-form__row { display: flex; gap: 8px; }
+.add-form__row--fine input { font-size: 0.85rem; }
+
+.add-form input {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+.add-form input:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--pantry);
+  outline-offset: 1px;
+}
+
+.btn {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 8px;
+  padding: 0 16px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn--primary { background: var(--pantry); color: #fff; }
+.btn--primary:hover { background: var(--pantry-deep); }
+.btn--buy {
+  background: transparent;
+  border: 1px solid var(--pantry);
+  color: var(--pantry-deep);
+  padding: 6px 12px;
+  font-size: 0.78rem;
+}
+.btn--buy:hover { background: var(--pantry); color: #fff; }
+.btn--ghost {
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  padding: 4px 8px;
+}
+.btn--ghost:hover { color: var(--rust); }
+.btn--add {
+  background: var(--mustard);
+  color: #3a2a06;
+  padding: 7px 14px;
+  font-size: 0.78rem;
+}
+.btn--add:hover { filter: brightness(0.94); }
+
+/* =========================================================================
+   Suggestions — "you probably forgot this"
+   ========================================================================= */
+.suggestions {
+  background: #FBF3E4;
+  border: 1px dashed #C99A3F;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+}
+.suggestions h3 {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #8A5E17;
+  margin-bottom: 10px;
+}
+.suggestion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(138, 94, 23, 0.18);
+}
+.suggestion:first-child { border-top: none; }
+.suggestion strong { display: block; font-size: 0.95rem; }
+.suggestion .muted { display: block; font-size: 0.78rem; margin-top: 2px; }
+
+/* =========================================================================
+   Shopping list — receipt / ticket-stub motif
+   ========================================================================= */
+.ticket-list { list-style: none; margin: 0; padding: 0; }
+
+.ticket {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 4px;
+  border-top: 1px dashed var(--line);
+}
+.ticket:first-child { border-top: none; }
+
+.ticket__main { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.ticket__name { font-weight: 700; font-size: 1rem; }
+.ticket__sub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.01em;
+}
+.ticket__actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+
+.empty-state { padding: 18px 4px 4px; }
+
+/* =========================================================================
+   Rhythm panel
+   ========================================================================= */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.swatch { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.swatch--overbuy { background: var(--rust); }
+.swatch--borderline { background: var(--mustard); }
+.swatch--normal { background: var(--pantry); }
+.swatch--due { background: var(--mustard); opacity: 0.7; }
+
+.rhythm-row { padding: 14px 0; border-top: 1px solid var(--line-soft); }
+.rhythm-row:first-child { border-top: none; padding-top: 0; }
+
+.rhythm-row__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.rhythm-row__name { font-weight: 700; }
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: #fff;
+}
+.tag--overbuy, .tag--forgotten { background: var(--rust); }
+.tag--borderline, .tag--due { background: var(--mustard); color: #3a2a06; }
+.tag--normal { background: var(--pantry); }
+
+.rhythm-track {
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  display: flex;
+  border: 1px solid var(--line);
+}
+.rhythm-track__zone { height: 100%; }
+/* zone widths mirror the ratio bands: 0-.5 / .5-.8 / .8-1.15 / 1.15-1.6, scaled to a 1.6x track */
+.rhythm-track__zone--overbuy { width: 31.25%; background: var(--rust); opacity: 0.55; }
+.rhythm-track__zone--borderline { width: 18.75%; background: var(--mustard); opacity: 0.55; }
+.rhythm-track__zone--normal { width: 21.875%; background: var(--pantry); opacity: 0.55; }
+.rhythm-track__zone--due { width: 28.125%; background: var(--mustard); opacity: 0.35; }
+
+.rhythm-track__marker {
+  position: absolute;
+  top: -3px;
+  width: 4px;
+  height: 16px;
+  border-radius: 2px;
+  background: var(--ink);
+  transform: translateX(-50%);
+}
+
+.rhythm-row__msg { margin: 8px 0 0; font-size: 0.85rem; color: var(--ink-soft); }
+
+/* =========================================================================
+   Toast
+   ========================================================================= */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translate(-50%, 12px);
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.85rem;
+  padding: 12px 18px;
+  border-radius: 8px;
+  max-width: 90vw;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  border-left: 4px solid var(--pantry);
+}
+.toast[data-tone="alert"] { border-left-color: var(--rust); }
+.toast[data-tone="caution"] { border-left-color: var(--mustard); }
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast { transition: none; }
+}
